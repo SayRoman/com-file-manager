@@ -5,6 +5,7 @@ public class AdminMenu {
 
     private Map<Person, List<Salary>> map;
     Scanner sc = new Scanner(System.in);
+    Authorization authorization = new Authorization();
 
     public AdminMenu() {
         map = new HashMap<>();
@@ -21,7 +22,7 @@ public class AdminMenu {
             System.out.println("Click 3 = Set employee's salary");
             System.out.println("Click 4 = Edit employee details");
             System.out.println("Click 5 = Watch the employee's list with the salary");
-            System.out.println("Click 0 = Exit");
+            System.out.println("Click 0 = Return to authorization menu");
             switch (sc.next()) {
                 case "1": {
                     System.out.println("Write number employee: ");
@@ -36,8 +37,6 @@ public class AdminMenu {
                 }
                 break;
                 case "2": {
-
-
                         System.out.println("Write number employee: ");
                         int number = sc.nextInt();
 
@@ -73,6 +72,36 @@ public class AdminMenu {
                 }
 
                 break;
+                case "4":{
+                    System.out.println("Write number employee who you want to edit: ");
+                    int number = sc.nextInt();
+
+                    System.out.println("Input FIO:");
+                    String fIO = sc.next();
+
+                    Person person = new Person(number, fIO);
+
+                    if (map.containsKey(person)) {
+                        map.remove(person);
+                    } else {
+                        System.out.println("Can't find employee");
+                    }
+
+                    System.out.println("Write number employee: ");
+                    number = sc.nextInt();
+                    System.out.println("Write fIO employee: ");
+                    fIO = sc.next();
+                    if (map.containsKey(new Person(number, fIO))) {
+                        System.out.println("That employee is already has \n");
+                    } else {
+                        map.put(new Person(number, fIO), new ArrayList<>());
+                    }
+                    System.out.println("set salaray");
+                    double salary = sc.nextInt();
+                    map.get(person).add(new Salary(salary));
+
+                }
+                break;
                 case "5": {
                     // Set<Entry<Person, List<Pet>>> entrySet = map.entrySet();
                     // for (Entry<Person, List<Pet>> entry : entrySet) {
@@ -97,7 +126,7 @@ public class AdminMenu {
 
                 break;
                 case "0": {
-                    isRun = false;
+                    authorization.checkAutorization();
 
                     break;
                 }

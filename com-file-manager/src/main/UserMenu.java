@@ -3,6 +3,7 @@ import java.util.*;
 public class UserMenu {
     private Map<Person, List<Salary>> map;
     Scanner sc = new Scanner(System.in);
+    Authorization authorization = new Authorization();
 
     public UserMenu() {
         map = new HashMap<>();
@@ -15,13 +16,13 @@ public class UserMenu {
         boolean isRun = true;
         while (isRun) {
             System.out.println("Click 1 = Watch the employee's list with the salary");
-            System.out.println("Click 0 = Exit");
+            System.out.println("Click 0 = Return to authorization menu");
             switch (sc.next()) {
                 case "1": {
 
                     System.out.println("Click 1 = show all list");
                     System.out.println("Click 2 = search for an employee by FIO");
-                    System.out.println("Click 0 = return to the User Menu");
+                    System.out.println("Click 9 = return to the User Menu");
 
                     switch (sc.next()) {
                         case "1": {
@@ -53,7 +54,7 @@ public class UserMenu {
                 }
 
                 case "0": {
-                    isRun = false;
+                    authorization.checkAutorization();
 
                     break;
                 }
